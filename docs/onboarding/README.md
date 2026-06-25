@@ -48,7 +48,10 @@ O MCP dá ao Claude acesso de **leitura** aos dados do grupo (BigQuery) via agen
 **sempre com proteção de dados pessoais** (PII nunca é exposto).
 
 Teste pedindo ao Claude: *"faça um ping no agente de vendas do MCP"* — ele deve responder usando
-o gateway `Azzas_MCP`. A skill `azzas-dados` guia o Claude no uso correto.
+o gateway de dados Azzas. A skill `azzas-dados` guia o Claude no uso correto.
+
+> ℹ️ No menu de ferramentas, o conector pode aparecer como **"IAZZAS"** ou **"Azzas MCP"** —
+> é o mesmo gateway de dados.
 
 ## 5. Regras do jogo (importantes)
 

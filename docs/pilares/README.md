@@ -8,7 +8,7 @@ O hackathon trabalha 4 pilares estratégicos de IA na companhia. Cada pilar tem 
 | **Criativo** | Construir uma coleção cápsula de até 30 produtos: briefing/tema, produtos, ficha de repasse (simplificada) e produção de moda para showroom. | `pilar-criativo` |
 | **Compras** | Construir a distribuição de peças da Fábula para a coleção do INV26. | `pilar-compras` |
 | **Eficiência Operacional** | Automatizar um fluxo operacional do dia a dia (portal de chamados, Feedz, PPT...). | `pilar-eficiencia-operacional` |
-| **Receita & Clientes** | Propor novas formas de segmentar a base de clientes para encontrar insights e oportunidades. | `pilar-receita-clientes` |
+| **Receita & Clientes** | Propor novas formas de segmentar a base de clientes da **Animale**, além de RFM/Matriz McKinsey, para encontrar insights e oportunidades. | `pilar-receita-clientes` |
 
 ## Como usar
 
@@ -17,6 +17,13 @@ pilar e passa a seguir o guia (objetivo, dados disponíveis, abordagem, entregá
 
 Se quiser ler o conteúdo do guia diretamente, ele está em
 `.claude/skills/pilar-<nome>/SKILL.md`.
+
+## Playbooks oficiais por pilar
+
+| Pilar | Material |
+|---|---|
+| Receita & Clientes | [Playbook do participante (Animale)](receita-clientes-animale.md) · [deck `.pptx`](receita-clientes-animale.pptx) |
+| Criativo | Workshop de geração de imagem (PDF na raiz do repo) + biblioteca de prompts em `.claude/skills/pilar-criativo/references/prompts-imagem.md` |
 
 ## O que todo pilar tem em comum
 
