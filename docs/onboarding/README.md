@@ -20,7 +20,7 @@ ativa sozinho quando você fala do tema.
 ## 2. Pré-requisitos
 
 - **Claude Code** instalado (CLI, app desktop, ou extensão de IDE). Veja `claude.ai/code`.
-- Acesso ao **MCP de dados Azzas** (passo 4).
+- Conta do hackathon (o **MCP de dados já vem conectado** nela — passo 4).
 - Git, para clonar este repositório.
 
 ## 3. Clonar e abrir
@@ -38,20 +38,17 @@ Ao abrir aqui, o Claude **já carrega automaticamente**:
 > Confirme dizendo ao Claude: *"quais skills você tem disponíveis?"* — ele deve listar
 > `azzas-dados`, `azzas-contexto-publico`, `consulting-storytelling` e as `pilar-*`.
 
-## 4. Conectar o MCP de dados
+## 4. MCP de dados — já vem conectado
+
+O **MCP de dados Azzas já está configurado por default** em todas as contas do hackathon (nível
+team). **Você não precisa instalar nem autenticar nada** — ao abrir o Claude, os agentes de dados
+já estão disponíveis.
 
 O MCP dá ao Claude acesso de **leitura** aos dados do grupo (BigQuery) via agentes especializados,
-**sempre com proteção de dados pessoais**.
+**sempre com proteção de dados pessoais** (PII nunca é exposto).
 
-> 🔧 **Configuração:** _(a ser preenchida com o endpoint/config oficial do MCP — ver nota da organização)._
-> Quando disponível, o repositório trará um `.mcp.json` e o Claude conectará automaticamente ao
-> abrir o projeto. Enquanto isso, use o passo manual abaixo.
-
-**Conexão manual (fallback):**
-- No Claude Code: `claude mcp add` e siga o fluxo de autenticação do conector Azzas; ou
-- No claude.ai: adicione o conector "Azzas MCP" nas integrações.
-
-Teste pedindo ao Claude: *"faça um ping no agente de vendas do MCP"*.
+Teste pedindo ao Claude: *"faça um ping no agente de vendas do MCP"* — ele deve responder usando
+o gateway `Azzas_MCP`. A skill `azzas-dados` guia o Claude no uso correto.
 
 ## 5. Regras do jogo (importantes)
 

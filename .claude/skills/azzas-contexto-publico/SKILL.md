@@ -4,7 +4,7 @@ description: >
   Contexto institucional PÚBLICO do Grupo Azzas 2154 para os times do hackathon. Use quando
   alguém perguntar sobre o grupo, suas marcas (Farm, Animale, Arezzo, Schutz, Reserva, Hering,
   Fábula, Maria Filó, NV, Cris Barros, Carol Bassi, OFF Premium, Foxton, etc.), a estrutura de
-  Business Units, a história/M&A do grupo, ou a liderança. Contém apenas informação pública
+  Business Units, ou a história/M&A do grupo. Contém apenas informação pública
   (fonte: RI oficial). NÃO contém dados financeiros, resultados, ou contexto societário sensível.
 ---
 
@@ -103,12 +103,6 @@ IPO 2011) e **Grupo Soma** (criado em 2010 pela união de Animale + Farm, IPO 20
 | 2022 | Arezzo&Co adquire **Carol Bassi**, HG e Sunset |
 | 2023 | Arezzo&Co adquire **Vicenza** |
 | **2024** | **Nasce a AZZAS 2154** — fusão Arezzo&Co + Grupo Soma |
-
-## Liderança (diretoria estatutária)
-
-- **Alexandre Café Birman** — CEO / Diretor Presidente e de Operações. Fundador de Schutz e Alexandre Birman; CEO Arezzo&Co desde 2013.
-- **Roberto Luiz Jatahy Gonçalves** — Diretor (co-CEO, legado Soma). Cofundador da Animale; criou o Grupo Soma em 2010.
-- **Eric Alexandre Alencar** — CFO / Diretor Financeiro e RI. Engenharia USP + MBA Wharton.
 
 ## Governança
 
