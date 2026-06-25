@@ -1,0 +1,14 @@
+# Arquivos grandes / binários pesados (limite GitHub: 100 MB)
+*.pdf
+*.mp4
+*.mov
+*.zip
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Temporários
+*.tmp
+*.log
+scratchpad/
