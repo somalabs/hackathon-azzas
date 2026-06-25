@@ -38,20 +38,24 @@ Ao abrir aqui, o Claude **já carrega automaticamente**:
 > Confirme dizendo ao Claude: *"quais skills você tem disponíveis?"* — ele deve listar
 > `azzas-dados`, `azzas-contexto-publico`, `consulting-storytelling` e as `pilar-*`.
 
-## 4. MCP de dados — já vem conectado
+## 4. Acesso aos dados — duas formas
 
-O **MCP de dados Azzas já está configurado por default** em todas as contas do hackathon (nível
-team). **Você não precisa instalar nem autenticar nada** — ao abrir o Claude, os agentes de dados
-já estão disponíveis.
+O **MCP de dados Azzas** dá acesso de **leitura** aos dados do grupo (BigQuery) via agentes
+especializados, **sempre com proteção de dados pessoais** (PII nunca é exposto). Você tem duas
+formas de usar — escolha a que preferir:
 
-O MCP dá ao Claude acesso de **leitura** aos dados do grupo (BigQuery) via agentes especializados,
-**sempre com proteção de dados pessoais** (PII nunca é exposto).
+**A) Claude (recomendado para este repo)** — o MCP **já vem configurado por default** em todas as
+contas do hackathon. **Não precisa instalar nem autenticar nada**: ao abrir o Claude, os agentes de
+dados já estão disponíveis. Bônus: aqui você também tem as skills deste repositório.
 
-Teste pedindo ao Claude: *"faça um ping no agente de vendas do MCP"* — ele deve responder usando
-o gateway de dados Azzas. A skill `azzas-dados` guia o Claude no uso correto.
+> Teste pedindo ao Claude: *"faça um ping no agente de vendas do MCP"*. A skill `azzas-dados`
+> guia o Claude no uso correto dos agentes.
 
-> ℹ️ No menu de ferramentas, o conector pode aparecer como **"IAZZAS"** ou **"Azzas MCP"** —
-> é o mesmo gateway de dados.
+**B) IAZZAS** ([iazzas.somalabs.com.br](https://iazzas.somalabs.com.br)) — o "ChatGPT interno" da
+SomaLabs, uma interface web plug-and-play já conectada aos mesmos MCPs. Útil para perguntas rápidas
+em linguagem natural sem abrir o Claude Code.
+
+Os dois caminhos batem nos **mesmos dados e nas mesmas regras de PII**.
 
 ## 5. Regras do jogo (importantes)
 
