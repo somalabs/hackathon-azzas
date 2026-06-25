@@ -1,3 +1,7 @@
+# Bundles de skill de origem (material pessoal/sensível — NÃO versionar)
+# Inclui azzas-contexto.skill, que contém dados não-públicos.
+*.skill
+
 # Arquivos grandes / binários pesados (limite GitHub: 100 MB)
 *.pdf
 *.mp4
