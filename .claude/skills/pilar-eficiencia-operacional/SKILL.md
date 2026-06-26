@@ -2,57 +2,77 @@
 name: pilar-eficiencia-operacional
 description: >
   Guia do pilar EFICIÊNCIA OPERACIONAL do Hackathon Azzas. Use quando o time estiver
-  trabalhando no case de automação de processos: automatizar um fluxo operacional do dia a dia
-  (portal de chamados, Feedz, geração de PPT, relatórios, etc.) com IA. Acione em conversas
-  sobre automação, redução de custo/tempo, fluxo operacional, chamados, Feedz, RPA, integração
-  de sistemas ou eliminação de trabalho manual.
+  construindo um AGENTE DE ANÁLISE DE DADOS que automatiza um fluxo: ler uma base, gerar uma
+  visão e comunicar os resultados sozinho. Acione em conversas sobre automação, agente de IA,
+  N8N, fluxo automatizado, Prompt, integração (e-mail/Teams/painel), análise automática de
+  dados, ou redução de trabalho manual.
 ---
 
-# Pilar Eficiência Operacional — Automatizar um Fluxo
+# Pilar Eficiência Operacional — Construir um Agente de IA
 
 ## O case
 
-> **Automatizar um fluxo operacional do seu dia a dia.**
-> Exemplos: portal de chamados, Feedz, geração de PPT, relatórios recorrentes.
+> **Crie um agente de análise de dados.** A partir de uma base de dados, o agente deve **gerar
+> uma visão e comunicar os resultados automaticamente** — ponta a ponta, sem trabalho manual.
 
-A tese: automação de processos e redução de custo "ficou fácil de capturar" com IA. O objetivo é
-pegar um processo **real, repetitivo e chato** do dia a dia e mostrar a IA fazendo o trabalho —
-com ganho mensurável de tempo/qualidade.
+O espírito do pilar: automação de processos + IA ficou fácil de capturar. Hoje você constrói o seu
+**primeiro agente de verdade** e o vê trabalhar do início ao fim.
 
-## Entregável esperado
+> 📄 Deck oficial do participante: [`docs/pilares/eficiencia-operacional.md`](../../../docs/pilares/eficiencia-operacional.md)
+> (versão HTML interativa `eficiencia-operacional.html` na mesma pasta).
 
-Um **fluxo automatizado funcionando** (ou um protótipo convincente), com:
-1. **O processo "antes"** — passos manuais, tempo gasto, dores.
-2. **A automação** — o que a IA/integração faz, ponta a ponta.
-3. **O ganho** — tempo economizado, erros evitados, custo reduzido (estime e rotule).
-4. **Como escalar** — o que falta para virar produção.
+## Os 3 passos do agente
 
-## Como o Claude ajuda
+| # | Passo | O que faz |
+|---|---|---|
+| **01** | **Ler a base** | Acessa a base de dados e entende a estrutura das informações. |
+| **02** | **Gerar a visão** | Analisa os dados e produz os principais números, recortes e insights. |
+| **03** | **Comunicar** | Envia os resultados automaticamente — por e-mail, Teams ou um painel. |
 
-O Claude Code é ótimo para automação porque combina **raciocínio + execução de código + acesso
-a ferramentas (MCP)**. Caminhos comuns:
+## As peças (como tudo se conecta)
 
-- **Geração de documentos/PPT:** transformar dados ou texto bruto em relatório/apresentação
-  estruturada (a skill `consulting-storytelling` ajuda na narrativa do deck).
-- **Triagem e resposta:** classificar chamados/mensagens, sugerir resposta, rotear.
-- **Extração e consolidação:** ler planilhas/PDFs/e-mails e consolidar em um formato único.
-- **Integração via MCP:** vários sistemas do grupo já têm conectores MCP disponíveis na sessão
-  (ex.: **Feedz**, dados Azzas, e outros). Use `ToolSearch` para descobrir as tools disponíveis
-  e encadeá-las no fluxo.
+**Prompt + Claude + N8N = Agente.**
+
+- **Prompt** — a *instrução* que você dá à IA. Quanto mais clara, melhor o resultado.
+  Fórmula: **papel + tarefa + dados + formato**. (Ex. fraco: "analise as vendas". Ex. forte:
+  "Você é um analista. Calcule vendas e MKP por marca, região e estado a partir deste CSV e liste
+  3 destaques em 5 linhas.")
+- **Claude** — o *cérebro*: lê e resume, escreve, analisa dados, gera código/páginas.
+- **N8N** — os *braços* que conectam tudo: ferramenta visual de automação (blocos tipo Lego) que
+  liga apps (e-mail, Teams, Drive, bancos de dados) sem programar do zero. Estrutura de um fluxo:
+  **Gatilho** (horário/arquivo/clique) → **Conectores** (apps) → **Nó de IA** (Claude) → **Saídas** (enviar/publicar/salvar/avisar).
+
+> Automação tradicional **segue regras fixas** e trava no inesperado. Automação **com IA**
+> interpreta, decide e lida com o que foge do padrão. A automação *faz*, a IA *entende* — juntas
+> resolvem o que antes exigia uma pessoa.
+
+## Formato
+
+Em equipes · **2h15 de execução** · **3 entregáveis** · apresentação final.
+
+## Dados disponíveis (via MCP — skill `azzas-dados`)
+
+A "base de dados" do agente pode ser o MCP de dados Azzas (vendas, clientes, devoluções, mídia/CRM,
+atacado, Farm Global) — o Claude lê e analisa com o protocolo de escopo e as regras de PII. Você
+também pode usar uma base própria (CSV/planilha) que o time trouxer.
+
+> ⚠️ Se o agente toca dados de pessoas, mantenha **PII fora** de qualquer saída (e-mail, painel,
+> mensagem). Trabalhe sempre agregado — ver `CLAUDE.md` e a skill `azzas-dados`.
 
 ## Abordagem sugerida
 
-1. **Escolha um processo estreito e real** — melhor automatizar 100% de uma tarefa pequena do
-   que 30% de uma grande. Procure algo repetitivo, baseado em regras e com volume.
-2. **Mapeie o "antes"** — passos, inputs, outputs, tempo por execução, frequência.
-3. **Desenhe o "depois"** — onde a IA decide, onde só executa, onde o humano valida.
-4. **Construa o mínimo que funciona** — um caminho feliz ponta a ponta vale mais que slides.
-5. **Meça** — tempo antes vs depois, % automatizado, erros evitados.
+1. **Escolha o fluxo** — uma análise recorrente e chata que valha a pena automatizar (ex.: um
+   resumo diário/semanal de um indicador, enviado pro time).
+2. **Defina o Prompt** — papel + tarefa + dados + formato; teste e refine no Claude.
+3. **Monte o agente** — ligue base → Claude (análise) → canal de comunicação. Use N8N para
+   orquestrar gatilho e envio, ou monte o fluxo direto no Claude se for suficiente.
+4. **Rode ponta a ponta** — um caminho feliz completo vale mais que slides.
+5. **Mostre o ganho** — tempo antes vs depois, frequência, erros evitados.
 
 ## Dicas
 
-- **Ganho mensurável é o que ganha o case.** "Reduz de 2h para 5min, 40×/mês" convence.
-- Cuidado com **dados sensíveis**: se o fluxo toca dados de pessoas, mantenha PII fora de
-  qualquer saída e siga as regras do `CLAUDE.md`.
-- Pense em **confiabilidade**: o que acontece quando a IA erra? Tenha o ponto de validação humana.
-- Descubra ferramentas com `ToolSearch` — há conectores MCP além do de dados (ex.: Feedz para RH/engajamento).
+- **Estreito e completo** > amplo e pela metade: automatize 100% de uma tarefa pequena.
+- **Ganho mensurável ganha o case** — "de 2h para 5min, 40×/mês" convence.
+- Pense na **confiabilidade**: o que acontece quando a IA erra? Tenha ponto de validação humana.
+- Para a comunicação final, capriche no formato (a skill `azzas-identidade-visual` padroniza
+  painéis/relatórios; `consulting-storytelling` ajuda na apresentação).

@@ -38,6 +38,7 @@ Detalhes: [`docs/pilares/`](docs/pilares/).
 | `azzas-dados` | Como usar o MCP de dados (escopo, roteamento, PII, tabelas). |
 | `azzas-contexto-publico` | Contexto institucional público do grupo (marcas, estrutura, história). |
 | `consulting-storytelling` | Estruturar a apresentação final no padrão de consultoria. |
+| `azzas-identidade-visual` | Design system da Azzas (paleta, tipografia, componentes) para padronizar entregas visuais. |
 | `pilar-criativo` · `pilar-compras` · `pilar-eficiencia-operacional` · `pilar-receita-clientes` | Guia por pilar. |
 
 ## Sobre

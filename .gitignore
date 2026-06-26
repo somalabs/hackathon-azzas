@@ -12,6 +12,26 @@ docs/pilares/compras-dados/
 *.mov
 *.zip
 
+# Skills do plugin "superpowers" injetadas automaticamente — NÃO fazem parte deste repo
+/.agents/
+/skills-lock.json
+/.claude/skills/dispatching-parallel-agents
+/.claude/skills/executing-plans
+/.claude/skills/find-skills
+/.claude/skills/finishing-a-development-branch
+/.claude/skills/frontend-design
+/.claude/skills/receiving-code-review
+/.claude/skills/requesting-code-review
+/.claude/skills/subagent-driven-development
+/.claude/skills/systematic-debugging
+/.claude/skills/test-driven-development
+/.claude/skills/using-git-worktrees
+/.claude/skills/using-superpowers
+/.claude/skills/verification-before-completion
+/.claude/skills/web-design-guidelines
+/.claude/skills/writing-plans
+/.claude/skills/writing-skills
+
 # Sistema
 .DS_Store
 Thumbs.db

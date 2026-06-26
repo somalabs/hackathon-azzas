@@ -15,7 +15,7 @@ ao **MCP de dados Azzas** (BigQuery via agentes especializados).
 |---|---|
 | **Criativo** | Construir uma coleção cápsula de até 30 produtos: briefing/tema, produtos, ficha de repasse (simplificada) e produção de moda para showroom. |
 | **Compras** | Construir um algoritmo de distribuição inicial da coleção INV26 da **Fábula** entre as 10 lojas físicas. |
-| **Eficiência Operacional** | Automatizar um fluxo operacional do dia a dia (ex.: portal de chamados, Feedz, PPT). |
+| **Eficiência Operacional** | Construir um agente de IA que lê uma base, gera uma visão e comunica os resultados automaticamente (Claude + Prompt + N8N). |
 | **Receita & Clientes** | Propor novas formas de segmentar a base de clientes da **Animale** (além de RFM/Matriz McKinsey) — agrupar para achar insights e oportunidades de negócio. |
 
 Cada pilar tem uma **skill-guia** dedicada (`pilar-*`) que ativa automaticamente quando o
@@ -26,6 +26,7 @@ time conversa sobre o tema. Consulte `docs/` para onboarding e referências.
 - **`azzas-dados`** — como usar o MCP de dados (escopo, roteamento, PII, tabelas). **Leia antes de qualquer análise de dados.**
 - **`azzas-contexto-publico`** — contexto institucional público do grupo (marcas, estrutura, história).
 - **`consulting-storytelling`** — estruturar apresentações no padrão de consultoria (todos os times apresentam no fim).
+- **`azzas-identidade-visual`** — design system da Azzas (paleta, tipografia, tokens CSS, componentes) para padronizar qualquer entrega visual (HTML, dashboard, slides).
 - **`pilar-criativo`**, **`pilar-compras`**, **`pilar-eficiencia-operacional`**, **`pilar-receita-clientes`** — guias por pilar.
 
 ## Regras de ouro (valem para todos os times)
