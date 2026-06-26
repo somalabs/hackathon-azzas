@@ -22,7 +22,7 @@ inicial. Distribuir **pouco** → ruptura antes do ressuprimento assumir. Distri
 esvazia o CD e compromete o estoque regulador que abastece as lojas depois. O desafio é o equilíbrio.
 
 > 📄 Briefing completo: [`docs/pilares/compras-fabula-inv26.md`](../../../docs/pilares/compras-fabula-inv26.md)
-> · deck `compras-fabula-inv26.pptx` na mesma pasta · arquivos de dados: ver onboarding do pilar.
+> · deck `.pptx` na mesma pasta · arquivos de dados (`.xlsx`) em `docs/pilares/compras-dados/`.
 
 ## Números do desafio
 

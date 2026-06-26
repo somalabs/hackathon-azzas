@@ -45,8 +45,7 @@ obriga). 49 de 2.980 combinações são "NÃO". (O time pode propor nova cluster
 
 **`leadtimes_INV26_lancamento_fabula.xlsx`** — dias de trânsito CD → filial. `FILIAL`, `LEADTIME`.
 
-> 📦 Os três arquivos `.xlsx` contêm dados comerciais granulares e **não estão versionados** neste
-> repositório público — são entregues aos times do pilar Compras separadamente.
+> 📦 Os três arquivos `.xlsx` estão em [`compras-dados/`](compras-dados/): [compra](compras-dados/compra_INV26_lancamento_fabula.xlsx) · [sortimento](compras-dados/sortimento_INV26_lancamento_fabula.xlsx) · [leadtimes](compras-dados/leadtimes_INV26_lancamento_fabula.xlsx).
 
 | Filial | Leadtime (dias) |
 |---|---|

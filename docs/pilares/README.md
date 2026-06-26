@@ -27,9 +27,8 @@ Se quiser ler o conteúdo do guia diretamente, ele está em
 | Receita & Clientes | [Playbook do participante (Animale)](receita-clientes-animale.md) · [deck `.pptx`](receita-clientes-animale.pptx) |
 | Criativo | Workshop de geração de imagem (PDF na raiz do repo) + biblioteca de prompts em `.claude/skills/pilar-criativo/references/prompts-imagem.md` |
 
-> 📦 **Arquivos de dados do case de Compras** (`compra`, `sortimento`, `leadtimes` da Fábula INV26):
-> contêm dados comerciais granulares e **não estão versionados** neste repo público (ver
-> `.gitignore`). São distribuídos aos times do pilar Compras separadamente.
+> 📦 **Arquivos de dados do case de Compras** (`compra`, `sortimento`, `leadtimes` da Fábula INV26)
+> estão em [`compras-dados/`](compras-dados/) — são os insumos diretos do algoritmo.
 
 ## O que todo pilar tem em comum
 
