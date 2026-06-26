@@ -21,8 +21,16 @@ ao **MCP de dados Azzas** (BigQuery via agentes especializados).
 Cada pilar tem uma **skill-guia** dedicada (`pilar-*`) que ativa automaticamente quando o
 time conversa sobre o tema. Consulte `docs/` para onboarding e referências.
 
+## Primeiro contato
+
+Se for o início da sessão de um time e eles ainda não disseram em que estão trabalhando (ou
+mandarem só um "oi"/"vamos começar"), **conduza o onboarding** (skill `onboarding`): dê as
+boas-vindas e faça as perguntas de contexto (quem é o time, nível técnico, qual pilar, objetivo)
+antes de mergulhar. Se o time já chegar dizendo o que quer, pule direto pro trabalho.
+
 ## Skills disponíveis neste repo
 
+- **`onboarding`** — fluxo de boas-vindas: entrevista o time no início e direciona pro pilar certo.
 - **`azzas-dados`** — como usar o MCP de dados (escopo, roteamento, PII, tabelas). **Leia antes de qualquer análise de dados.**
 - **`azzas-contexto-publico`** — contexto institucional público do grupo (marcas, estrutura, história).
 - **`consulting-storytelling`** — estruturar apresentações no padrão de consultoria (todos os times apresentam no fim).

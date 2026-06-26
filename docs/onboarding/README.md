@@ -68,6 +68,7 @@ Os dois caminhos batem nos **mesmos dados e nas mesmas regras de PII**.
 
 ## 6. Fluxo de trabalho sugerido
 
+0. **Diga "oi" pro Claude.** No primeiro contato ele conduz um rápido onboarding — pergunta quem é o time, o nível de familiaridade, qual pilar vão atacar e o objetivo — e já te aponta o caminho.
 1. Leia o guia do seu pilar em [`docs/pilares/`](../pilares/) (ou só comece a conversar — a skill ativa).
 2. Peça ao Claude para te ajudar a **enquadrar o problema** antes de sair puxando dado.
 3. Explore os dados com o MCP (a skill `azzas-dados` orienta o Claude no caminho certo).

@@ -35,6 +35,7 @@ Detalhes: [`docs/pilares/`](docs/pilares/).
 
 | Skill | Para quê |
 |---|---|
+| `onboarding` | Fluxo de boas-vindas: entrevista o time no início e direciona pro pilar certo. |
 | `azzas-dados` | Como usar o MCP de dados (escopo, roteamento, PII, tabelas). |
 | `azzas-contexto-publico` | Contexto institucional público do grupo (marcas, estrutura, história). |
 | `consulting-storytelling` | Estruturar a apresentação final no padrão de consultoria. |
