@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Distribuição INV26 · Fábula — MVP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Red+Hat+Display:wght@300;400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+<style>
+:root{
+  --ink:#000;--ink-soft:#595959;--ink-faint:#999;--surface:#fff;
+  --surface-warm:#E8E8E4;--surface-cream:#F9F6EA;
+  --navy:#274566;--steel:#3D5A73;--blue-soft:#A1C6ED;--blue-light:#C5D9ED;
+  --status-pending:#B5AFA8;
+  --font-primary:'Red Hat Display',Arial,sans-serif;
+  --font-editorial:'Playfair Display',Georgia,serif;
+  --radius-sm:4px;--radius-md:8px;--radius-lg:16px;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.08);--shadow-md:0 4px 12px rgba(0,0,0,.10);
+  --ok:#274566;--warn:#B5AFA8;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--surface-warm);color:var(--ink);font-family:var(--font-primary);font-weight:400}
+h1,h2,h3,h4{margin:0;font-weight:400}
+/* HEADER */
+.navbar{background:var(--ink);color:var(--surface);padding:.9rem clamp(1rem,3vw,2.5rem);
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;position:sticky;top:0;z-index:50}
+.brand{display:flex;flex-direction:column;gap:.1rem}
+.brand .name{font-weight:600;font-size:1.15rem;letter-spacing:.06em;text-transform:uppercase}
+.brand .sub{font-family:var(--font-editorial);font-style:italic;font-size:.85rem;opacity:.7}
+.nav-actions{display:flex;gap:.6rem;flex-wrap:wrap}
+.btn{font-family:var(--font-primary);font-size:.8rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+  border:none;border-radius:var(--radius-sm);padding:.6rem 1rem;cursor:pointer;transition:.15s}
+.btn--primary{background:var(--blue-soft);color:var(--navy)}
+.btn--primary:hover{background:var(--blue-light)}
+.btn--ghost{background:transparent;color:var(--surface);border:1px solid rgba(255,255,255,.35)}
+.btn--ghost:hover{background:rgba(255,255,255,.12)}
+.btn--done{background:#2f7d4f33;color:#bfe6cf;border:1px solid #2f7d4f;cursor:default}
+/* TABS */
+.tabs{background:var(--surface);border-bottom:1px solid var(--surface-warm);padding:0 clamp(1rem,3vw,2.5rem);
+  display:flex;gap:.25rem;overflow-x:auto;position:sticky;top:62px;z-index:40}
+.tab{font-size:.85rem;font-weight:600;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-faint);
+  background:none;border:none;border-bottom:2px solid transparent;padding:.9rem .9rem;cursor:pointer;white-space:nowrap}
+.tab:hover{color:var(--ink-soft)}
+.tab.active{color:var(--navy);border-bottom-color:var(--navy)}
+/* PAGE */
+.page{max-width:1200px;margin:0 auto;padding:clamp(1rem,3vw,2.5rem)}
+.view{display:none}.view.active{display:block}
+.eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:.4rem}
+.view-title{font-size:1.6rem;margin-bottom:.3rem}
+.view-lead{font-family:var(--font-editorial);font-style:italic;color:var(--ink-soft);margin-bottom:1.5rem;font-size:1.05rem}
+/* KPI */
+.kpi-row{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin-bottom:1.5rem}
+.kpi{background:var(--surface);border-radius:var(--radius-md);padding:1.2rem;box-shadow:var(--shadow-sm)}
+.kpi.dark{background:var(--navy);color:var(--surface)}
+.kpi .lab{font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}
+.kpi.dark .lab{color:var(--blue-light)}
+.kpi .val{font-size:2rem;font-weight:300;margin-top:.3rem;line-height:1}
+.kpi .note{font-size:.8rem;color:var(--ink-soft);margin-top:.35rem}
+.kpi.dark .note{color:var(--blue-light)}
+/* CARD */
+.card-grid{display:grid;gap:1.25rem;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.card{background:var(--surface);border-radius:var(--radius-md);padding:1.4rem;box-shadow:var(--shadow-sm)}
+.card h3{font-size:1.1rem;font-weight:600;margin-bottom:1rem}
+.card .desc{font-weight:300;color:var(--ink-soft);font-size:.95rem;line-height:1.55}
+/* BAR list */
+.bars{display:flex;flex-direction:column;gap:.7rem}
+.bar-item{display:grid;grid-template-columns:150px 1fr auto;align-items:center;gap:.7rem}
+.bar-item .nm{font-size:.85rem;color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-track{background:var(--surface-warm);border-radius:99px;height:14px;overflow:hidden}
+.bar-fill{height:100%;background:var(--navy);border-radius:99px}
+.bar-fill.soft{background:var(--blue-soft)}
+.bar-val{font-size:.85rem;font-weight:600;min-width:42px;text-align:right}
+/* TABLE */
+.toolbar{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem;align-items:center}
+.toolbar input,.toolbar select{font-family:var(--font-primary);font-size:.9rem;padding:.55rem .7rem;
+  border:1px solid var(--surface-warm);border-radius:var(--radius-sm);background:var(--surface)}
+.toolbar input{flex:1;min-width:180px}
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--radius-md);background:var(--surface);box-shadow:var(--shadow-sm)}
+table{width:100%;border-collapse:collapse;min-width:600px}
+th,td{padding:.6rem .8rem;font-size:.875rem;text-align:left;white-space:nowrap;border-bottom:1px solid var(--surface-warm)}
+th{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-faint);font-weight:600;
+  position:sticky;top:0;background:var(--surface);cursor:pointer;user-select:none}
+th:hover{color:var(--navy)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+tbody tr:hover{background:var(--surface-cream)}
+.muted{color:var(--ink-faint)}
+.count{font-size:.85rem;color:var(--ink-soft);margin-left:auto}
+/* VALIDATION */
+.val-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.val{background:var(--surface);border-radius:var(--radius-md);padding:1.2rem;box-shadow:var(--shadow-sm);border-left:4px solid var(--ok)}
+.val.fail{border-left-color:#a33}
+.val .badge{font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.val.ok .badge{color:var(--ok)}.val.fail .badge{color:#a33}
+.val .vname{font-weight:600;margin:.4rem 0 .2rem;font-size:1rem}
+.val .vdet{font-size:.85rem;color:var(--ink-soft);font-weight:300}
+.val .vval{font-size:1.6rem;font-weight:300;margin-top:.3rem}
+.banner{background:var(--navy);color:var(--surface);border-radius:var(--radius-md);padding:1.2rem 1.4rem;margin-bottom:1.5rem;
+  display:flex;align-items:center;gap:1rem}
+.banner .ic{font-size:1.6rem}
+.banner .t{font-weight:600}.banner .s{font-size:.85rem;opacity:.8;font-weight:300}
+.pill{display:inline-block;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;
+  padding:.2rem .5rem;border-radius:var(--radius-sm);background:#27456612;color:var(--navy)}
+.pill.lt{background:#a3373715;color:#a33}
+/* MODAL */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:100;padding:1rem}
+.overlay.show{display:flex}
+.modal{background:var(--surface);border-radius:var(--radius-lg);padding:2rem;max-width:440px;width:100%;box-shadow:var(--shadow-md)}
+.modal h3{font-size:1.3rem;font-weight:600;margin-bottom:.6rem}
+.modal p{font-weight:300;color:var(--ink-soft);line-height:1.55;margin-bottom:1.5rem}
+.modal .row{display:flex;gap:.6rem;justify-content:flex-end}
+.modal .warn-tag{display:inline-block;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;
+  color:var(--status-pending);margin-bottom:.8rem}
+.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--navy);color:#fff;
+  padding:.9rem 1.4rem;border-radius:var(--radius-md);box-shadow:var(--shadow-md);opacity:0;transition:.3s;z-index:120;font-size:.9rem;font-weight:600}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.footnote{margin-top:2rem;font-size:.78rem;color:var(--ink-faint);font-weight:300;line-height:1.5}
+</style>
+</head>
+<body>
+<header class="navbar">
+  <div class="brand">
+    <span class="name">Fábula · Distribuição INV26</span>
+    <span class="sub">algoritmo de distribuição inicial — 10 lojas físicas · v3</span>
+  </div>
+  <div class="nav-actions">
+    <button class="btn btn--ghost" onclick="exportXlsx()">Exportar xlsx</button>
+    <button class="btn btn--primary" id="genBtn" onclick="openModal()">Gerar pedidos no sistema</button>
+  </div>
+</header>
+
+<nav class="tabs" id="tabs"></nav>
+
+<main class="page">
+  <!-- VISÃO GERAL -->
+  <section class="view active" data-view="overview">
+    <div class="eyebrow">MVP · Apresentação</div>
+    <h1 class="view-title">Distribuição inicial INV26</h1>
+    <p class="view-lead">Quanto, de cada produto-cor-grade, cada loja recebe no lançamento.</p>
+    <div class="kpi-row" id="kpiRow"></div>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Unidades por loja</h3>
+        <div class="bars" id="barStores"></div>
+      </div>
+      <div class="card">
+        <h3>Como o algoritmo decidiu</h3>
+        <p class="desc" id="logicCard"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DRIVERS -->
+  <section class="view" data-view="drivers">
+    <div class="eyebrow">Dashboard A</div>
+    <h1 class="view-title">Drivers da decisão</h1>
+    <p class="view-lead">INV26 não tem histórico — mapeamos cada produto aos 15 mais similares de INV23/24/25.</p>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Pesos das dimensões de similaridade</h3>
+        <div class="bars" id="barDims"></div>
+      </div>
+      <div class="card">
+        <h3>Velocidade prevista × horizonte por loja</h3>
+        <div class="bars" id="barVel"></div>
+      </div>
+      <div class="card">
+        <h3>Regras de negócio aplicadas</h3>
+        <div id="rulesList"></div>
+      </div>
+      <div class="card">
+        <h3>Pesos de coleção & faixas de preço</h3>
+        <div id="weightsBox"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POR LOJA -->
+  <section class="view" data-view="stores">
+    <div class="eyebrow">Dashboard B</div>
+    <h1 class="view-title">Resultado por loja</h1>
+    <p class="view-lead">Demanda prevista, recebido e cobertura — com destaque para risco de leadtime.</p>
+    <div class="table-wrap">
+      <table id="storeTable"><thead><tr>
+        <th>Loja</th><th class="num">Leadtime</th><th class="num">Horizonte</th>
+        <th class="num">Vel. média</th><th class="num">Demanda</th><th class="num">Recebido</th>
+        <th class="num">% atend.</th><th class="num">Produto-cor</th>
+      </tr></thead><tbody></tbody></table>
+    </div>
+  </section>
+
+  <!-- POR PRODUTO -->
+  <section class="view" data-view="products">
+    <div class="eyebrow">Dashboard C</div>
+    <h1 class="view-title">Resultado por produto</h1>
+    <p class="view-lead">Comprado vs distribuído vs retido no CD. A maior parte fica de regulador para ressuprimento.</p>
+    <div class="kpi-row" id="prodKpis"></div>
+    <div class="card" style="margin-bottom:1.25rem">
+      <h3>Distribuição por grupo de produto</h3>
+      <div class="bars" id="barGroups"></div>
+    </div>
+    <div class="toolbar">
+      <input id="prodSearch" placeholder="Buscar produto, cor ou descrição…" oninput="renderProducts()">
+      <select id="prodGroup" onchange="renderProducts()"><option value="">Todos os grupos</option></select>
+    </div>
+    <div class="table-wrap">
+      <table id="prodTable"><thead><tr>
+        <th data-k="produto">Produto</th><th data-k="cor">Cor</th><th data-k="grupo">Grupo</th>
+        <th class="num" data-k="comprado">Comprado</th><th class="num" data-k="distribuido">Distrib.</th>
+        <th class="num" data-k="sobra_cd">Sobra CD</th><th class="num" data-k="n_filiais">Lojas</th>
+      </tr></thead><tbody></tbody></table>
+    </div>
+  </section>
+
+  <!-- VALIDAÇÕES -->
+  <section class="view" data-view="health">
+    <div class="eyebrow">Dashboard D</div>
+    <h1 class="view-title">Saúde da distribuição</h1>
+    <p class="view-lead">Constraints obrigatórios verificados sobre o output final.</p>
+    <div class="banner" id="healthBanner"></div>
+    <div class="val-grid" id="valGrid"></div>
+  </section>
+
+  <!-- TABELA -->
+  <section class="view" data-view="table">
+    <div class="eyebrow">Output</div>
+    <h1 class="view-title">Tabela de distribuição</h1>
+    <p class="view-lead">FILIAL · PRODUTO · COR · TAMANHO · QTD — a base exportável para xlsx.</p>
+    <div class="toolbar">
+      <input id="distSearch" placeholder="Buscar…" oninput="renderDist()">
+      <select id="distStore" onchange="renderDist()"><option value="">Todas as lojas</option></select>
+      <span class="count" id="distCount"></span>
+    </div>
+    <div class="table-wrap">
+      <table id="distTable"><thead><tr>
+        <th data-k="filial">Loja</th><th data-k="produto">Produto</th><th data-k="cor">Cor</th>
+        <th class="num" data-k="tamanho">Tam.</th><th class="num" data-k="qtd">Qtd</th>
+      </tr></thead><tbody></tbody></table>
+    </div>
+    <p class="footnote" id="footnote"></p>
+  </section>
+</main>
+
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <span class="warn-tag">⚠ Requer aprovação do analista</span>
+    <h3>Gerar pedidos de distribuição?</h3>
+    <p id="modalText"></p>
+    <div class="row">
+      <button class="btn btn--ghost" style="color:var(--ink-soft);border-color:var(--surface-warm)" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn--primary" onclick="confirmGen()">Confirmar geração</button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="data.js"></script>
+<script>
+const D = window.APP_DATA;
+const fmt = n => n.toLocaleString('pt-BR');
+
+/* ---- Tabs ---- */
+const TABS=[["overview","Visão geral"],["drivers","Drivers"],["stores","Por loja"],
+            ["products","Por produto"],["health","Validações"],["table","Tabela"]];
+const tabsEl=document.getElementById('tabs');
+TABS.forEach(([id,lab],i)=>{const b=document.createElement('button');b.className='tab'+(i===0?' active':'');
+  b.textContent=lab;b.onclick=()=>switchView(id,b);tabsEl.appendChild(b);});
+function switchView(id,btn){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.dataset.view===id));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');window.scrollTo(0,0);}
+
+/* ---- KPIs ---- */
+const m=D.meta;
+document.getElementById('kpiRow').innerHTML=`
+  <div class="kpi dark"><div class="lab">Peças distribuídas</div><div class="val">${fmt(m.total_distribuido)}</div><div class="note">de ${fmt(m.total_comprado)} compradas (${m.pct_distribuido}%)</div></div>
+  <div class="kpi"><div class="lab">Retido no CD</div><div class="val">${fmt(m.sobra_cd)}</div><div class="note">estoque regulador p/ ressuprimento</div></div>
+  <div class="kpi"><div class="lab">Produto-cor</div><div class="val">${fmt(m.n_produto_cor)}</div><div class="note">${m.n_filiais} lojas físicas</div></div>
+  <div class="kpi"><div class="lab">Linhas de envio</div><div class="val">${fmt(m.n_linhas_output)}</div><div class="note">produto-cor-tamanho-loja</div></div>`;
+
+document.getElementById('logicCard').innerHTML=
+  `Para cada <b>produto-cor</b>: estima-se a demanda por loja via velocidade dos similares históricos, `+
+  `aplica-se o <b>sortimento</b> (NÃO → 0), escala-se proporcionalmente quando o estoque não cobre tudo `+
+  `(priorizando lojas de <b>maior leadtime</b>) e distribui-se a grade pelo mix de compra, `+
+  `exigindo <b>≥50% da grade</b> preenchida. Método de demanda: <b>${m.metodo_demanda}</b>.`;
+
+/* ---- Bars helper ---- */
+function bars(el,items,opts={}){const max=Math.max(...items.map(i=>i.v))||1;
+  el.innerHTML=items.map(i=>`<div class="bar-item"><span class="nm" title="${i.n}">${i.n}</span>
+    <div class="bar-track"><div class="bar-fill ${opts.soft?'soft':''}" style="width:${(i.v/max*100).toFixed(1)}%"></div></div>
+    <span class="bar-val">${i.d!=null?i.d:fmt(i.v)}</span></div>`).join('');}
+
+bars(document.getElementById('barStores'),D.filiais.map(f=>({n:f.filial,v:f.qtd_recebida})));
+
+/* ---- Drivers ---- */
+bars(document.getElementById('barDims'),D.criterios.dimensoes.map(d=>({n:d.label,v:d.peso,d:(d.peso*100).toFixed(0)+'%'})));
+bars(document.getElementById('barVel'),D.filiais.slice().sort((a,b)=>b.vel_media-a.vel_media)
+  .map(f=>({n:f.filial,v:f.vel_media,d:f.vel_media.toFixed(3)})),{soft:true});
+document.getElementById('rulesList').innerHTML=Object.entries({
+  'Sortimento':D.criterios.regras.sortimento,'Horizonte':D.criterios.regras.horizonte,
+  'Completude de grade':D.criterios.regras.limiar_grade,'Mínimo por SKU':D.criterios.regras.min_un_sku+' unidade',
+  'Falta de estoque':D.criterios.regras.prioridade_falta_estoque
+}).map(([k,v])=>`<div style="margin-bottom:.7rem"><span class="pill">${k}</span><div class="desc" style="margin-top:.3rem">${v}</div></div>`).join('');
+document.getElementById('weightsBox').innerHTML=
+  '<div class="desc"><b>Pesos de coleção</b> (recência):</div>'+
+  Object.entries(D.criterios.pesos_colecao).map(([k,v])=>`<span class="pill" style="margin:.3rem .3rem 0 0">${k} ×${v}</span>`).join('')+
+  '<div class="desc" style="margin-top:1rem"><b>Faixas de preço</b>:</div>'+
+  D.criterios.faixas_preco.map(f=>`<span class="pill" style="margin:.3rem .3rem 0 0">${f.tier} · ${f.label}</span>`).join('')+
+  `<div class="desc" style="margin-top:1rem">Janela on-season: <b>${D.criterios.janela_on_season_dias} dias</b>.</div>`;
+
+/* ---- Stores table ---- */
+const stb=document.querySelector('#storeTable tbody');
+stb.innerHTML=D.filiais.map(f=>{const lt=f.leadtime>=25;return `<tr>
+  <td>${f.filial} ${lt?'<span class="pill lt">leadtime alto</span>':''}</td>
+  <td class="num">${f.leadtime}d</td><td class="num">${f.horizonte}d</td>
+  <td class="num">${f.vel_media.toFixed(3)}</td><td class="num">${fmt(f.demanda_prevista)}</td>
+  <td class="num">${fmt(f.qtd_recebida)}</td><td class="num">${f.pct_atendido}%</td>
+  <td class="num">${fmt(f.n_produto_cor)}</td></tr>`;}).join('');
+
+/* ---- Products ---- */
+const pk=D.produtos;
+document.getElementById('prodKpis').innerHTML=`
+  <div class="kpi"><div class="lab">Produto-cor distribuídos</div><div class="val">${fmt(pk.filter(p=>p.distribuido>0).length)}</div><div class="note">de ${fmt(pk.length)} comprados</div></div>
+  <div class="kpi"><div class="lab">Grupos de produto</div><div class="val">${fmt(D.grupos.length)}</div></div>
+  <div class="kpi dark"><div class="lab">% médio distribuído</div><div class="val">${m.pct_distribuido}%</div><div class="note">restante = regulador CD</div></div>`;
+bars(document.getElementById('barGroups'),D.grupos.slice(0,10).map(g=>({n:g.grupo,v:g.distribuido})));
+const grpSel=document.getElementById('prodGroup');
+D.grupos.forEach(g=>{const o=document.createElement('option');o.value=g.grupo;o.textContent=g.grupo;grpSel.appendChild(o);});
+let prodSort={k:'distribuido',dir:-1};
+function renderProducts(){const q=document.getElementById('prodSearch').value.toLowerCase();
+  const g=document.getElementById('prodGroup').value;
+  let rows=pk.filter(p=>(!g||p.grupo===g)&&(!q||(p.produto+p.cor+p.desc+p.grupo).toLowerCase().includes(q)));
+  rows.sort((a,b)=>{const x=a[prodSort.k],y=b[prodSort.k];return (x>y?1:x<y?-1:0)*prodSort.dir;});
+  document.querySelector('#prodTable tbody').innerHTML=rows.slice(0,400).map(p=>`<tr>
+    <td>${p.produto}</td><td>${p.cor}</td><td class="muted">${p.grupo||'—'}</td>
+    <td class="num">${fmt(p.comprado)}</td><td class="num">${fmt(p.distribuido)}</td>
+    <td class="num">${fmt(p.sobra_cd)}</td><td class="num">${p.n_filiais}</td></tr>`).join('');}
+document.querySelectorAll('#prodTable th[data-k]').forEach(th=>th.onclick=()=>{
+  const k=th.dataset.k;prodSort.dir=prodSort.k===k?-prodSort.dir:1;prodSort.k=k;renderProducts();});
+renderProducts();
+
+/* ---- Health ---- */
+const v=D.validacoes;
+document.getElementById('healthBanner').innerHTML=
+  `<span class="ic">${v.tudo_ok?'✓':'⚠'}</span><div><div class="t">${v.tudo_ok?'Todas as validações passaram':'Há validações com erro'}</div>
+   <div class="s">Qtd por linha entre ${v.qtd_min} e ${v.qtd_max} unidades · output pronto para aprovação</div></div>`;
+document.getElementById('valGrid').innerHTML=v.checks.map(c=>`<div class="val ${c.ok?'ok':'fail'}">
+  <span class="badge">${c.ok?'✓ OK':'✗ FALHA'}</span><div class="vname">${c.nome}</div>
+  <div class="vval">${c.valor}</div><div class="vdet">${c.detalhe}</div></div>`).join('');
+
+/* ---- Dist table ---- */
+const dd=D.distribuicao;
+const dsSel=document.getElementById('distStore');
+[...new Set(dd.map(r=>r.filial))].sort().forEach(s=>{const o=document.createElement('option');o.value=s;o.textContent=s;dsSel.appendChild(o);});
+let distSort={k:'filial',dir:1};
+function renderDist(){const q=document.getElementById('distSearch').value.toLowerCase();
+  const s=document.getElementById('distStore').value;
+  let rows=dd.filter(r=>(!s||r.filial===s)&&(!q||(r.filial+r.produto+r.cor+r.tamanho).toLowerCase().includes(q)));
+  rows.sort((a,b)=>{const x=a[distSort.k],y=b[distSort.k];return (x>y?1:x<y?-1:0)*distSort.dir;});
+  document.getElementById('distCount').textContent=fmt(rows.length)+' linhas';
+  document.querySelector('#distTable tbody').innerHTML=rows.slice(0,1000).map(r=>`<tr>
+    <td>${r.filial}</td><td>${r.produto}</td><td>${r.cor}</td>
+    <td class="num">${r.tamanho}</td><td class="num">${r.qtd}</td></tr>`).join('')
+    +(rows.length>1000?`<tr><td colspan="5" class="muted">…exibindo 1.000 de ${fmt(rows.length)}. Use os filtros ou exporte para ver tudo.</td></tr>`:'');}
+document.querySelectorAll('#distTable th[data-k]').forEach(th=>th.onclick=()=>{
+  const k=th.dataset.k;distSort.dir=distSort.k===k?-distSort.dir:1;distSort.k=k;renderDist();});
+renderDist();
+document.getElementById('footnote').textContent=
+  `Coleção ${m.colecao} · ${m.marca} · canal ${m.canal} · modelo ${m.versao_algoritmo} (data-base ${m.data_base_modelo}). `+
+  `Dados agregados, sem informação pessoal. MVP para apresentação.`;
+
+/* ---- Modal / mock generation ---- */
+function openModal(){document.getElementById('modalText').innerHTML=
+  `Serão gerados <b>${fmt(m.n_linhas_output)} pedidos</b> de distribuição (${fmt(m.total_distribuido)} peças) `+
+  `para as <b>${m.n_filiais} lojas</b> da Fábula. Esta é uma simulação do MVP — nenhum sistema externo é alterado.`;
+  document.getElementById('overlay').classList.add('show');}
+function closeModal(){document.getElementById('overlay').classList.remove('show');}
+function confirmGen(){closeModal();
+  const b=document.getElementById('genBtn');b.className='btn btn--done';b.textContent='✓ Pedidos gerados';b.onclick=null;
+  showToast(`✓ ${fmt(m.n_linhas_output)} pedidos gerados no sistema (simulação)`);}
+function showToast(t){const el=document.getElementById('toast');el.textContent=t;el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),3200);}
+
+/* ---- Export xlsx ---- */
+function exportXlsx(){
+  const rows=dd.map(r=>({FILIAL:r.filial,PRODUTO:r.produto,COR_PRODUTO:r.cor,TAMANHO:r.tamanho,QTD_DISTRIBUIR:r.qtd}));
+  if(window.XLSX){const ws=XLSX.utils.json_to_sheet(rows);const wb=XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb,ws,'distribuicao');XLSX.writeFile(wb,'distribuicao_inv26.xlsx');
+    showToast('Arquivo distribuicao_inv26.xlsx exportado');}
+  else{ // fallback CSV
+    const head='FILIAL,PRODUTO,COR_PRODUTO,TAMANHO,QTD_DISTRIBUIR\n';
+    const body=rows.map(r=>`${r.FILIAL},${r.PRODUTO},${r.COR_PRODUTO},${r.TAMANHO},${r.QTD_DISTRIBUIR}`).join('\n');
+    const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([head+body],{type:'text/csv'}));
+    a.download='distribuicao_inv26.csv';a.click();showToast('xlsx indisponível offline — exportado CSV');}
+}
+</script>
+</body>
+</html>

@@ -27,6 +27,10 @@
 /.claude/skills/writing-plans
 /.claude/skills/writing-skills
 
+# Dados históricos de venda/preço baixados do BigQuery — NÃO versionar (repo público)
+historico_inv_vendas.csv
+historico_attrs_precos.csv
+
 # Sistema
 .DS_Store
 Thumbs.db
