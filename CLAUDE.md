@@ -13,7 +13,7 @@ ao **MCP de dados Azzas** (BigQuery via agentes especializados).
 
 | Pilar | Case |
 |---|---|
-| **Criativo** | Construir uma coleção cápsula de até 30 produtos: briefing/tema, produtos, ficha de repasse (simplificada) e produção de moda para showroom. |
+| **Criativo** | Criar uma coleção cápsula (até 30 produtos) a partir das próprias referências, gerando as imagens dos produtos no Freepik, e apresentá-la. |
 | **Compras** | Construir um algoritmo de distribuição inicial da coleção INV26 da **Fábula** entre as 10 lojas físicas. |
 | **Eficiência Operacional** | Construir um agente de IA que lê uma base, gera uma visão e comunica os resultados automaticamente (Claude + Prompt + N8N). |
 | **Receita & Clientes** | Propor novas formas de segmentar a base de clientes da **Animale** (além de RFM/Matriz McKinsey) — agrupar para achar insights e oportunidades de negócio. |

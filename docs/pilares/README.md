@@ -5,7 +5,7 @@ O hackathon trabalha 4 pilares estratégicos de IA na companhia. Cada pilar tem 
 
 | Pilar | Case | Skill-guia |
 |---|---|---|
-| **Criativo** | Construir uma coleção cápsula de até 30 produtos: briefing/tema, produtos, ficha de repasse (simplificada) e produção de moda para showroom. | `pilar-criativo` |
+| **Criativo** | Criar uma coleção cápsula (até 30 produtos) a partir das próprias referências, gerando as imagens dos produtos no Freepik, e apresentá-la. | `pilar-criativo` |
 | **Compras** | Construir um algoritmo de **distribuição inicial** da coleção INV26 da **Fábula** entre as 10 lojas físicas. | `pilar-compras` |
 | **Eficiência Operacional** | Construir um agente de IA que lê uma base, gera uma visão e comunica os resultados automaticamente (Claude + Prompt + N8N). | `pilar-eficiencia-operacional` |
 | **Receita & Clientes** | Propor novas formas de segmentar a base de clientes da **Animale**, além de RFM/Matriz McKinsey, para encontrar insights e oportunidades. | `pilar-receita-clientes` |

@@ -1,64 +1,61 @@
 ---
 name: pilar-criativo
 description: >
-  Guia do pilar CRIATIVO do Hackathon Azzas. Use quando o time estiver trabalhando no case
-  criativo: construir uma coleção cápsula (até 30 produtos) com briefing/tema, produtos, ficha
-  de repasse simplificada e produção de moda para showroom. Acione em conversas sobre coleção
-  cápsula, briefing de moda, criação de produto, estampa, geração de imagem de produto com IA
-  (Freepik, Nano Banana, Flux Kontext Pro), ficha de repasse ou showroom.
+  Guia do pilar CRIATIVO do Hackathon Azzas. Use quando o time estiver criando uma coleção
+  cápsula (até 30 produtos) com IA: partindo das próprias referências, fazendo combinados e
+  gerando as imagens dos produtos no Freepik. Acione em conversas sobre coleção cápsula, briefing
+  de moda, referências/inspiração, tema, estampa, geração de imagem de produto com IA (Freepik,
+  Nano Banana, Flux Kontext Pro), ou como apresentar a coleção.
 ---
 
 # Pilar Criativo — Coleção Cápsula com IA
 
 ## O case
 
-> **Construir uma coleção cápsula de até 30 produtos**, incluindo: **briefing/tema**,
-> **produtos**, **ficha de repasse (simplificada)** e **produção de moda para showroom.**
+> **Criar uma coleção cápsula (até 30 produtos) usando IA** — e pensar como apresentá-la.
 
-A pergunta de fundo: como a **criação de imagens com IA** pode ser estratégica para o negócio
-— acelerando do croqui ao cadastro, gerando variações de cor/estampa/forma e visualizando
-peças na modelo sem produção física.
+Não há um briefing fechado: a essência do desafio é o time **trazer as próprias referências**,
+fazer **combinados** entre elas e **criar a coleção**. A criação das imagens dos produtos é feita
+no **Freepik**. O foco é explorar como a geração de imagem com IA acelera o trabalho criativo —
+do conceito à visualização — sem produção física.
 
-## Entregável esperado
+## O caminho (leve, o time conduz)
 
-1. **Briefing / tema** — o conceito da cápsula: inspiração, paleta, público, ocasião, marca de referência.
-2. **Produtos** — até 30 peças, com imagens (geradas via IA), categorias e variações.
-3. **Ficha de repasse simplificada** — a ponte do criativo para o comercial: por produto, os
-   atributos essenciais (categoria, cor/estampa, material, silhueta, faixa de preço sugerida).
-4. **Produção de moda para showroom** — visualização das peças (still e/ou na modelo) e a
-   narrativa de apresentação da coleção.
+1. **Reúna referências** — as suas, do seu repertório/inspiração. É daqui que a coleção nasce.
+2. **Combine** — misture referências, cores, estampas, materiais e formas até achar a direção.
+3. **Crie a coleção** — até 30 produtos coerentes entre si. Gere as imagens no Freepik.
+4. **Pense na apresentação** — como contar a história da coleção (use `consulting-storytelling`).
+
+## Adicionais opcionais (se o time quiser ir além)
+
+Nada disso é obrigatório — são formas de enriquecer a coleção com dados:
+
+- **Tendências** — pesquisar referências e tendências de mercado para embasar o tema.
+- **Análise de venda** — via MCP (skill `azzas-dados`), olhar o que vende/girou em coleções
+  passadas (ex.: categorias, cores) para inspirar escolhas. Sempre agregado.
+- **Ficha de repasse simplificada** — organizar os produtos numa tabela com os atributos
+  essenciais (categoria, cor/estampa, material, silhueta) — útil pra "passar" a coleção adiante.
 
 ## Como o Claude ajuda
 
-- **Briefing & tema:** brainstorming de conceito, coerência com a identidade da marca
-  (use a skill `azzas-contexto-publico` para tom/posicionamento), estrutura do storytelling.
-- **Curadoria & organização:** montar a grade de produtos (mix de categorias), nomear peças,
-  organizar a ficha de repasse como tabela.
-- **Geração de imagem:** o time gera as imagens no **Freepik** (modelos Nano Banana, Flux
-  Kontext Pro, GPT Image High). O Claude ajuda a **escrever e refinar os prompts** — veja a
-  biblioteca em `references/prompts-imagem.md`.
-- **Showroom & deck:** com a skill `consulting-storytelling`, montar a apresentação da coleção.
+- **Conceito & curadoria:** brainstorming de tema a partir das suas referências, coerência da
+  cápsula, nomes de peças, organização da grade de produtos.
+- **Prompts de imagem:** o time gera as imagens no **Freepik**; o Claude ajuda a escrever e
+  refinar os prompts. Biblioteca pronta em **`references/prompts-imagem.md`**.
+- **Apresentação:** com `consulting-storytelling` e `azzas-identidade-visual`, montar o showroom/deck.
 
-## Toolkit de geração de imagem (do workshop SomaLabs)
+## Toolkit de imagem (Freepik) — resumo
 
-Modelos (no Freepik):
-- **Nano Banana** — principal: remix, blend, variações, inserção, style.
-- **Flux Kontext Pro** — detalhamento: sketches técnicos, vistas, close-ups.
-- **GPT Image High** — criativo: tecidos manuais, bordados, display.
+Modelos: **Nano Banana** (remix, blend, variações, inserção, style — principal) · **Flux Kontext
+Pro** (sketches técnicos, vistas, close-ups) · **GPT Image High** (tecidos, bordados, display).
+Estrutura de prompt: **[VERBO] + [O QUÊ] + de @IMG1 + em @IMG2**. Aspect ratio: 3:4 produto · 9:16
+look · 1:1 detalhe. Sempre rode 4 variações. Fluxo: EXPLORE → EXTRACT → VARIATIONS → INSERT+STYLE.
 
-Estrutura de prompt: **[VERBO] + [O QUÊ] + de @IMG1 + em @IMG2**.
-Verbos úteis: EXTRACT · CONVERT · GENERATE · CHANGE · TURN · INSERT · TRANSFER · INSPIRED BY.
-Aspect ratio: 3:4 produto · 9:16 look · 2:3 vistas · 1:1 detalhe. **Sempre rode 4 variações antes de escolher.**
-
-Fluxo criativo do workshop: **EXPLORE** (real → desenho técnico / remix / blend) →
-**EXTRACT** (peça → still, vistas, detalhes) → **VARIATIONS** (cor, forma, material) →
-**INSERT + STYLE** (inserir tecido/detalhe/estampa, transferir estilo, peça na modelo).
-
-A biblioteca completa de prompts está em **`references/prompts-imagem.md`**. O playbook visual
-original é o PDF `[Farm BR] Workshop IA - Assistentes de Estilo.pdf` na raiz do repo.
+A biblioteca completa de prompts está em **`references/prompts-imagem.md`**. O material original é o
+PDF `[Farm BR] Workshop IA - Assistentes de Estilo.pdf` (workshop SomaLabs).
 
 ## Dicas
 
-- Comece pelo **tema** — ele amarra paleta, materiais e silhuetas. Sem tema, a cápsula vira lista de peças soltas.
-- Mantenha **coerência visual**: mesma direção de still/fundo para todas as peças facilita o showroom.
-- A **ficha de repasse** é o que torna a cápsula "executável" — capriche nos atributos que o comercial precisa.
+- A coleção é sua — **comece pelas suas referências**, não por uma fórmula.
+- Coerência visual ajuda no showroom: mantenha uma direção consistente de still/fundo.
+- Rode várias variações no Freepik e **cure** as melhores; a IA é rápida pra explorar.
