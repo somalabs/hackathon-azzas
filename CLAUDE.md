@@ -27,6 +27,7 @@ time conversa sobre o tema. Consulte `docs/` para onboarding e referências.
 - **`azzas-contexto-publico`** — contexto institucional público do grupo (marcas, estrutura, história).
 - **`consulting-storytelling`** — estruturar apresentações no padrão de consultoria (todos os times apresentam no fim).
 - **`azzas-identidade-visual`** — design system da Azzas (paleta, tipografia, tokens CSS, componentes) para padronizar qualquer entrega visual (HTML, dashboard, slides).
+- **`frontend-design`** — direção de design para construir interfaces/soluções web com identidade própria (útil se o entregável for um app/site).
 - **`pilar-criativo`**, **`pilar-compras`**, **`pilar-eficiencia-operacional`**, **`pilar-receita-clientes`** — guias por pilar.
 
 ## Regras de ouro (valem para todos os times)
