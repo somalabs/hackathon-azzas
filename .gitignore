@@ -2,6 +2,10 @@
 # Inclui azzas-contexto.skill, que contém dados não-públicos.
 *.skill
 
+# Dados comerciais granulares da Fábula INV26 — fora do git até decisão de exposição pública
+# (volumes de compra por SKU). Ver docs/pilares/compras-dados/.
+docs/pilares/compras-dados/
+
 # Arquivos grandes / binários pesados (limite GitHub: 100 MB)
 *.pdf
 *.mp4
